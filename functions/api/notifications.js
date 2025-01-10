@@ -3,6 +3,7 @@ import { v4 as uuidv4 } from 'uuid';
 // POST api/notifications
 export async function onRequestPost(context) {
 
+  // Ensure request contains valid JSON objects
   try{
     var requestNotifications = await context.request.json();
   } catch (e) {
