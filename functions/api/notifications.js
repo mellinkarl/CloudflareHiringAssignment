@@ -1,5 +1,3 @@
-import { v4 as uuidv4 } from 'uuid';
-
 // POST api/notifications
 export async function onRequestPost(context) {
 
@@ -30,7 +28,7 @@ export async function onRequestPost(context) {
       );
   }
     // Add UUID and Timestamp to notification
-    requestNotifications[i].id = uuidv4();
+    requestNotifications[i].id = crypto.randomUUID();
     requestNotifications[i].timestamp = Date.now();
   }
 
