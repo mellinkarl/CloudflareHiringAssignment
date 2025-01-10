@@ -46,3 +46,16 @@ export async function onRequestPost(context) {
     headers: { "Content-Type": "application/json" },
   });
 }
+
+// GET api/notifications
+export async function onRequestGet(context){
+
+  // Get notifications from KV
+  // If there are none, return empty array
+  let notifications = await context.env.cloudflareHiringAssignmentKV.get("notifications", "json");
+  notifications = notifications ? notifications : [];
+  
+  return new Response(JSON.stringify(notifications), {
+    headers: { "Content-Type": "application/json" },
+  });
+}
