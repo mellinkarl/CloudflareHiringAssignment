@@ -30,29 +30,6 @@ enabled = true
 # [ai]
 # binding = "AI"
 
-# Bind an Analytics Engine dataset. Use Analytics Engine to write analytics within your Pages Function.
-# Docs: https://developers.cloudflare.com/workers/wrangler/configuration/#analytics-engine-datasets
-# [[analytics_engine_datasets]]
-# binding = "MY_DATASET"
-
-# Bind a headless browser instance running on Cloudflare's global network.
-# Docs: https://developers.cloudflare.com/workers/wrangler/configuration/#browser-rendering
-# [browser]
-# binding = "MY_BROWSER"
-
-# Bind a D1 database. D1 is Cloudflare’s native serverless SQL database.
-# Docs: https://developers.cloudflare.com/workers/wrangler/configuration/#d1-databases
-# [[d1_databases]]
-# binding = "MY_DB"
-# database_name = "my-database"
-# database_id = "xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx"
-
-# Bind a dispatch namespace. Use Workers for Platforms to deploy serverless functions programmatically on behalf of your customers.
-# Docs: https://developers.cloudflare.com/workers/wrangler/configuration/#dispatch-namespace-bindings-workers-for-platforms
-# [[dispatch_namespaces]]
-# binding = "MY_DISPATCHER"
-# namespace = "my-namespace"
-
 
 # Bind a KV Namespace. Use KV as persistent storage for small key-value pairs.
 # Docs: https://developers.cloudflare.com/workers/wrangler/configuration/#kv-namespaces
@@ -61,15 +38,3 @@ binding = "cloudflareHiringAssignmentKV"
 id = "766d2e17537f44859e18f920c9808412"
 
 
-
-# Bind another Worker service. Use this binding to call another Worker without network overhead.
-# Docs: https://developers.cloudflare.com/workers/wrangler/configuration/#service-bindings
-# [[services]]
-# binding = "MY_SERVICE"
-# service = "my-service"
-
-# Bind a Vectorize index. Use to store and query vector embeddings for semantic search, classification and other vector search use-cases.
-# Docs: https://developers.cloudflare.com/workers/wrangler/configuration/#vectorize-indexes
-# [[vectorize]]
-# binding = "MY_INDEX"
-# index_name = "my-index"
