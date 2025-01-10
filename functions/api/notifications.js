@@ -59,3 +59,13 @@ export async function onRequestGet(context){
     headers: { "Content-Type": "application/json" },
   });
 }
+
+// DELETE api/notifications
+export async function onRequestDelete(context){
+
+  // Delete notifications from KV and return success message
+    await context.env.cloudflareHiringAssignmentKV.delete("notifications");
+    return new Response(JSON.stringify({ message: "Notifications deleted successfully!"}), {
+      headers : { "Content-Type": "application/json"},
+    });
+}
