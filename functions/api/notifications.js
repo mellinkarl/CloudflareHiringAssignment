@@ -48,24 +48,24 @@ export async function onRequestPost(context) {
 }
 
 // GET api/notifications
-export async function onRequestGet(context){
+export async function onRequestGet(context) {
 
   // Get notifications from KV
   // If there are none, return empty array
   let notifications = await context.env.cloudflareHiringAssignmentKV.get("notifications", "json");
   notifications = notifications ? notifications : [];
-  
+
   return new Response(JSON.stringify(notifications), {
     headers: { "Content-Type": "application/json" },
   });
 }
 
 // DELETE api/notifications
-export async function onRequestDelete(context){
+export async function onRequestDelete(context) {
 
   // Delete notifications from KV and return success message
-    await context.env.cloudflareHiringAssignmentKV.delete("notifications");
-    return new Response(JSON.stringify({ message: "Notifications deleted successfully!"}), {
-      headers : { "Content-Type": "application/json"},
-    });
+  await context.env.cloudflareHiringAssignmentKV.delete("notifications");
+  return new Response(JSON.stringify({ message: "Notifications deleted successfully!"}), {
+    headers : { "Content-Type": "application/json"},
+  });
 }
