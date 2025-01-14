@@ -13,12 +13,12 @@ export async function onRequestPost(context) {
   }
 
   // If single JSON object is given convert it to array
-  if (!Array.isArray(requestNotifications)){
+  if (!Array.isArray(requestNotifications)) {
     requestNotifications = [requestNotifications];
   }
 
   // Verify each notification the request body contains valid type, content and read variables
-  for (let i = 0; i < requestNotifications.length; i++){
+  for (let i = 0; i < requestNotifications.length; i++) {
     if (!["alert", "info", "success"].includes(requestNotifications[i].type) ||
     typeof requestNotifications[i].content.text !== "string" ||
     typeof requestNotifications[i].read !== "boolean") {
