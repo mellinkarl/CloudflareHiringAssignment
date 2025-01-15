@@ -38,7 +38,6 @@ function NotificationForm() {
                         value={notificationType} 
                         onChange={(e) => setNotificationType(e.target.value)}
                         required>
-                        <option value="" disabled>Choose Type</option>
                         <option value="alert">Alert</option>
                         <option value="info">Info</option>
                         <option value="success">Success</option>
