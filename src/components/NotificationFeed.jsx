@@ -20,10 +20,15 @@ function NotificationFeed() {
             const sortedNotifications = jsonNotifications.sort(function(x, y) {
                     return y.timestamp - x.timestamp;
                 })
-            setNotifications(sortedNotifications);
+            setNotifications(sortedNotifications); 
             }
 
+        // Load notifications initially
         loadNotifications();
+        
+        // Load notifications on interval of 4 seconds
+        const interval = setInterval(loadNotifications, 4000);
+        return () => clearInterval(interval);
     }, [])
 
     return (

@@ -4,6 +4,7 @@ function NotificationCard({notification}) {
     // Convert timestamp to Day Month Year, Time
     function getTimestamp(timestamp) {
         const date = new Date(timestamp);
+        
         return new Intl.DateTimeFormat("en-US", 
             { day: "2-digit", month: "short", year: "numeric", hour: "numeric", minute: "numeric", hour12: true }
         ).format(date).replace(",", "");
