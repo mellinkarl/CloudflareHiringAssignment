@@ -4,6 +4,7 @@ import '../css/notificationFeed.css';
 
 function NotificationFeed() {
     const [notifications, setNotifications] = useState([]);
+    const [loading, setLoading] = useState(true);
 
     // Fetch notifications from backend when page first renders
     useEffect(() => {
@@ -20,7 +21,8 @@ function NotificationFeed() {
             const sortedNotifications = jsonNotifications.sort(function(x, y) {
                     return y.timestamp - x.timestamp;
                 })
-            setNotifications(sortedNotifications); 
+            setNotifications(sortedNotifications);
+            setLoading(false);
             }
 
         // Load notifications initially
