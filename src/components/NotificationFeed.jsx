@@ -14,17 +14,14 @@ function NotificationFeed() {
                     headers: { "Content-Type": "application/json" },
                 });
                 const jsonNotifications = await kvNotifications.json();
-            } catch (e) {
-                return new Response(JSON.stringify({
-                error: "Error retrieving notifications from server"}), {
-                status: 400, headers: { "Content-Type": "application/json" }
-                })}
-
-            // Sort notifications based on timestamp
-            const sortedNotifications = jsonNotifications.sort(function(x, y) {
+                // Sort notifications based on timestamp
+                const sortedNotifications = jsonNotifications.sort(function(x, y) {
                     return y.timestamp - x.timestamp;
                 })
-            setNotifications(sortedNotifications);
+                setNotifications(sortedNotifications);
+            } catch (e) {
+                console.error("Error retrieving notifications", e)
+            }
             }
 
         // Load notifications initially
