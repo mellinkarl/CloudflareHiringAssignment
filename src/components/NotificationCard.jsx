@@ -1,5 +1,6 @@
 import '../css/notificationCard.css';
 function NotificationCard({notification}) {
+    const { type, content: { text: message }, timestamp } = notification;
 
     // Convert timestamp to Day Month Year, Time
     function getTimestamp(timestamp) {
@@ -11,12 +12,12 @@ function NotificationCard({notification}) {
         return `${ day } ${ month } ${ year } ${ time }${ a.toLowerCase() }`;
     }
     return (
-        <div className={`notification-card ${notification.type}`}>
+        <div className={`notification-card ${type}`}>
             <p className="notification-message">
-                {notification.content.text}
+                {message}
             </p>
             <div className="notification-timestamp">
-                {getTimestamp(notification.timestamp)}
+                {getTimestamp(timestamp)}
             </div>
         </div>
     )
