@@ -1,0 +1,31 @@
+
+
+.notification-card {
+    height: 70px;
+    border: 1px solid black;
+    font-size: 16px;
+    font-weight: 550;
+    color: black;
+    margin-bottom: 10px;
+    padding: 10px;
+}
+
+.notification-card.alert {
+    background-color: #ffcccb;
+}
+
+.notification-card.success {
+    background-color: #90ee90;
+}
+
+.notification-card.info {
+    background-color: #add8e6;
+}
+
+.notification-message {
+    margin: 0;
+}
+
+.notification-timestamp {
+    margin-top: 30px;
+}

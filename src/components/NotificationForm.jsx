@@ -1,8 +1,9 @@
 import { useState } from "react";
+import '../css/notificationForm.css';
 
 function NotificationForm() {
     const [notificationMessage, setNotificationMessage] = useState("");
-    const [notificationType, setNotificationType] = useState("");
+    const [notificationType, setNotificationType] = useState("alert");
 
 
     // Function for sending notification to KV on submit
