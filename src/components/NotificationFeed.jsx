@@ -4,25 +4,27 @@ import '../css/notificationFeed.css';
 
 function NotificationFeed() {
     const [notifications, setNotifications] = useState([]);
-    const [loading, setLoading] = useState(true);
 
     // Fetch notifications from backend when page first renders
     useEffect(() => {
         async function loadNotifications() {
-
-            const kvNotifications = await fetch("/api/notifications", {
-                method: "GET",
-                headers: { "Content-Type": "application/json" },
-            });
-            const jsonNotifications = await kvNotifications.json();
-
+            try {
+                const kvNotifications = await fetch("/api/notifications", {
+                    method: "GET",
+                    headers: { "Content-Type": "application/json" },
+                });
+                const jsonNotifications = await kvNotifications.json();
+            } catch (e) {
+                return new Response(JSON.stringify({
+                error: "Error retrieving notifications from server"}), {
+                status: 400, headers: { "Content-Type": "application/json" }
+                })}
 
             // Sort notifications based on timestamp
             const sortedNotifications = jsonNotifications.sort(function(x, y) {
                     return y.timestamp - x.timestamp;
                 })
             setNotifications(sortedNotifications);
-            setLoading(false);
             }
 
         // Load notifications initially
