@@ -23,29 +23,27 @@ function NotificationForm() {
         setNotificationType("");
       }
     return (
-        <div id="notification-form-container">
+        <form id="notification-form" onSubmit={formSubmit}>
             <h1 id="notification-form-title">Create Notification</h1>
-                <form id="notification-form" onSubmit={formSubmit}>
-                    {/* Text area for user to type notification message */}
-                    <textarea 
-                        id="notification-message" 
-                        placeholder="Message..." 
-                        value={notificationMessage} 
-                        onChange={(e) => setNotificationMessage(e.target.value)}
-                        required></textarea>
-                    {/* Select element for user to choose notification type */}
-                    <select 
-                        id="notification-type" 
-                        value={notificationType} 
-                        onChange={(e) => setNotificationType(e.target.value)}
-                        required>
-                        <option value="alert">Alert</option>
-                        <option value="info">Info</option>
-                        <option value="success">Success</option>
-                    </select>
-                    <button id="send-notification-btn" type="submit">Send</button>
-                </form>
-            </div>
+            {/* Text area for user to type notification message */}
+            <textarea 
+                id="notification-message" 
+                placeholder="Message..." 
+                value={notificationMessage} 
+                onChange={(e) => setNotificationMessage(e.target.value)}
+                required></textarea>
+            {/* Select element for user to choose notification type */}
+            <select 
+                id="notification-type" 
+                value={notificationType} 
+                onChange={(e) => setNotificationType(e.target.value)}
+                required>
+                <option value="alert">Alert</option>
+                <option value="info">Info</option>
+                <option value="success">Success</option>
+            </select>
+            <button id="send-notification-btn" type="submit">Send</button>
+        </form>
       )
 }
 

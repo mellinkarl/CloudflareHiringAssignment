@@ -12,6 +12,7 @@
 
 }
 
+/* Increase width when vertical with notification form */
 @media screen and (max-width: 768px) {
     #notification-feed {
       width: 80%;
