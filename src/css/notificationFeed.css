@@ -11,3 +11,10 @@
     margin-top: 50px;
 
 }
+
+@media screen and (max-width: 768px) {
+    #notification-feed {
+      width: 80%;
+      margin-top: 0;
+    }
+  }
