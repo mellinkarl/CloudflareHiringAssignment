@@ -4,6 +4,7 @@ import '../css/notificationFeed.css';
 
 function NotificationFeed() {
     const [notifications, setNotifications] = useState([]);
+    const [loading, setLoading] = useState(true);
 
     // Fetch notifications from backend when page first renders
     useEffect(() => {
@@ -21,6 +22,8 @@ function NotificationFeed() {
                 setNotifications(sortedNotifications);
             } catch (e) {
                 console.error("Error retrieving notifications", e)
+            } finally {
+                setLoading(false);
             }
             }
 
@@ -31,6 +34,11 @@ function NotificationFeed() {
         const interval = setInterval(loadNotifications, 4000);
         return () => clearInterval(interval);
     }, [])
+
+    // Wait until notification fetch is done
+    if (loading) {
+        return null;
+    }
 
     return (
         <div id="notification-feed">
