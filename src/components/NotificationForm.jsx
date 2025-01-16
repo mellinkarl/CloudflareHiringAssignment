@@ -23,7 +23,7 @@ function NotificationForm() {
 
         // Reset form fields
         setNotificationMessage("");
-        setNotificationType("");
+        setNotificationType("alert");
     }
     return (
         <form id="notification-form" onSubmit={formSubmit}>
