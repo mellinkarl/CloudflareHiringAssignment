@@ -42,6 +42,7 @@ function NotificationFeed() {
                 itemCount={notifications.length}
                 itemSize={80}
                 width={"100%"}
+                overscanCount={0}
             >
                 {({ index, style }) => (
                     <NotificationCard
