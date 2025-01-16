@@ -29,7 +29,7 @@ function NotificationFeed() {
                 console.error("Error retrieving notifications", e);
             }
         }
-
+        loadNotifications();
         // Load notifications on interval of 4 seconds
         const interval = setInterval(loadNotifications, 4000);
         return () => clearInterval(interval);
