@@ -1,50 +1,57 @@
 import { useState } from "react";
-import '../css/notificationForm.css';
+import "../css/notificationForm.css";
 
 function NotificationForm() {
     const [notificationMessage, setNotificationMessage] = useState("");
     const [notificationType, setNotificationType] = useState("alert");
 
-
     // Function for sending notification to KV on submit
     async function formSubmit(event) {
         event.preventDefault();
-    
+
         // Create notification object and send it to backend
-        let notification = { type: notificationType, content: { text: notificationMessage }, read: false };
+        let notification = {
+            type: notificationType,
+            content: { text: notificationMessage },
+            read: false,
+        };
         const resp = await fetch("/api/notifications", {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify(notification),
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify(notification),
         });
 
         // Reset form fields
         setNotificationMessage("");
         setNotificationType("");
-      }
+    }
     return (
         <form id="notification-form" onSubmit={formSubmit}>
             <h1 id="notification-form-title">Create Notification</h1>
             {/* Text area for user to type notification message */}
-            <textarea 
-                id="notification-message" 
-                placeholder="Message..." 
-                value={notificationMessage} 
+            <textarea
+                id="notification-message"
+                placeholder="Message..."
+                value={notificationMessage}
                 onChange={(e) => setNotificationMessage(e.target.value)}
-                required></textarea>
+                required
+            ></textarea>
             {/* Select element for user to choose notification type */}
-            <select 
-                id="notification-type" 
-                value={notificationType} 
+            <select
+                id="notification-type"
+                value={notificationType}
                 onChange={(e) => setNotificationType(e.target.value)}
-                required>
+                required
+            >
                 <option value="alert">Alert</option>
                 <option value="info">Info</option>
                 <option value="success">Success</option>
             </select>
-            <button id="send-notification-btn" type="submit">Send</button>
+            <button id="send-notification-btn" type="submit">
+                Send
+            </button>
         </form>
-      )
+    );
 }
 
 export default NotificationForm;

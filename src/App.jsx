@@ -1,13 +1,13 @@
-import NotificationForm from './components/NotificationForm'
-import NotificationFeed from './components/NotificationFeed'
+import NotificationForm from "./components/NotificationForm";
+import NotificationFeed from "./components/NotificationFeed";
 
 function App() {
-  return (
-    <>
-      <NotificationForm/>
-      <NotificationFeed/>
-    </>
-  )
+    return (
+        <>
+            <NotificationForm />
+            <NotificationFeed />
+        </>
+    );
 }
 
 export default App;
