@@ -14,10 +14,13 @@ function NotificationFeed() {
                     headers: { "Content-Type": "application/json" },
                 });
                 const jsonNotifications = await kvNotifications.json();
+                
+                // Filter out read notifications
                 // Sort notifications based on timestamp
-                const sortedNotifications = jsonNotifications.sort(function(x, y) {
-                    return y.timestamp - x.timestamp;
-                })
+                const sortedNotifications = jsonNotifications
+                    .filter(notification => !notification.read)
+                    .sort(function(x, y) { return y.timestamp - x.timestamp })
+
                 setNotifications(sortedNotifications);
             } catch (e) {
                 console.error("Error retrieving notifications", e)
