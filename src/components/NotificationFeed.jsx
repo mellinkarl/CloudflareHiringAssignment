@@ -44,15 +44,18 @@ function NotificationFeed() {
         getScrollElement: () => parentRef.current,
         estimateSize: () => 80,
         overscan: 0,
+        paddingStart: 20,
+        paddingEnd: 20,
     })
 
     return (
         <div id="notification-feed">
             <div ref={ parentRef }
-            style={{ height: "400px", overflow: "auto" }}
+            style={{ height: "400px", overflow: "auto"
+             }}
             >
                 {/* Get total size of list to store */}
-                <div style={{ height: `${rowVirtualizer.getTotalSize()}px`, width: "100%", position: "relative" }}
+                <div style={{ height: `${rowVirtualizer.getTotalSize() + 40}px`, width: "100%", position: "relative" }}
                 >
                     {rowVirtualizer.getVirtualItems().map((virtualItem) => (
                         <div key={ virtualItem.key }
