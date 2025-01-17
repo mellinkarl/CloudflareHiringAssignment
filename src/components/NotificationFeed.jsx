@@ -2,10 +2,12 @@ import NotificationCard from "./NotificationCard";
 import { useState, useEffect } from "react";
 import * as React from 'react'
 import "../css/notificationFeed.css";
-import { Virtuoso } from "react-virtuoso";
+import { useVirtualizer } from "@tanstack/react-virtual";
+
 
 function NotificationFeed() {
     const [notifications, setNotifications] = useState([]);
+    const parentRef = React.useRef(null);
 
     // Fetch notifications from backend when page first renders
     useEffect(() => {
@@ -36,26 +38,37 @@ function NotificationFeed() {
         return () => clearInterval(interval);
     }, []);
 
+    // Create row virtualizer for React Virtualize
+    const rowVirtualizer = useVirtualizer({
+        count: notifications.length,
+        getScrollElement: () => parentRef.current,
+        estimateSize: () => 80,
+        overscan: 0,
+    })
+
     return (
         <div id="notification-feed">
-                <Virtuoso
-                    style={{ height:"400px", width: "100%", display: "flex", gap: "10px" }}
-                    totalCount={notifications.length}
-                    components={{
-                        List: React.forwardRef(({ style, children, ...props }, ref) => (
-                          <div ref={ref} style={{ ...style, display: 'flex', flexDirection: 'column', gap: 10}} {...props}>
-                            {children}
-                          </div>
-                        )),
-                      }}
-                    overscan={0}
-                    increaseViewportBy={{ top: 0, bottom: 0 }}
-                    itemContent={(index) => {return <NotificationCard
-                        notification={notifications[index]}
-                        key={notifications[index].id}
-                    />}}
-                    />
-                
+            <div ref={ parentRef }
+            style={{ height: "400px", overflow: "auto" }}
+            >
+                {/* Get total size of list to store */}
+                <div style={{ height: `${rowVirtualizer.getTotalSize()}px`, width: "100%", position: "relative" }}
+                >
+                    {rowVirtualizer.getVirtualItems().map((virtualItem) => (
+                        <div key={ virtualItem.key }
+                        style={{ position: "absolute", 
+                            top: 0, 
+                            left: 0, 
+                            width: "100%", 
+                            height: "70px", 
+                            transform: `translateY(${virtualItem.start}px)`,
+                            marginBottom: "10px"}}
+                            >
+                                <NotificationCard notification={notifications[virtualItem.index]} />
+                            </div>
+                    ))}
+                </div>
+            </div>
         </div>
     );
 }
