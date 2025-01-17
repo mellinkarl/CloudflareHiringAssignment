@@ -1,7 +1,8 @@
 import NotificationCard from "./NotificationCard";
 import { useState, useEffect } from "react";
+import * as React from 'react'
 import "../css/notificationFeed.css";
-import { FixedSizeList as List } from "react-window";
+import { Virtuoso } from "react-virtuoso";
 
 function NotificationFeed() {
     const [notifications, setNotifications] = useState([]);
@@ -37,25 +38,24 @@ function NotificationFeed() {
 
     return (
         <div id="notification-feed">
-            <List
-                height={400}
-                itemCount={notifications.length}
-                itemSize={80}
-                width={"100%"}
-                overscanCount={0}
-            >
-                {({ index, style }) => (
-                    <NotificationCard
+                <Virtuoso
+                    style={{ height:"400px", width: "100%", display: "flex", gap: "10px" }}
+                    totalCount={notifications.length}
+                    components={{
+                        List: React.forwardRef(({ style, children, ...props }, ref) => (
+                          <div ref={ref} style={{ ...style, display: 'flex', flexDirection: 'column', gap: 10}} {...props}>
+                            {children}
+                          </div>
+                        )),
+                      }}
+                    overscan={0}
+                    increaseViewportBy={{ top: 0, bottom: 0 }}
+                    itemContent={(index) => {return <NotificationCard
                         notification={notifications[index]}
-                        style={{
-                            ...style,
-                            height: "70px",
-                            marginBottom: "10px",
-                        }}
                         key={notifications[index].id}
+                    />}}
                     />
-                )}
-            </List>
+                
         </div>
     );
 }
