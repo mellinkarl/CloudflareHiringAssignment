@@ -1,13 +1,11 @@
 import NotificationCard from "./NotificationCard";
 import { useState, useEffect } from "react";
-import * as React from 'react'
+import { FixedSizeList as List } from 'react-window';
 import "../css/notificationFeed.css";
-import { useVirtualizer } from "@tanstack/react-virtual";
 
 
 function NotificationFeed() {
     const [notifications, setNotifications] = useState([]);
-    const parentRef = React.useRef(null);
 
     // Fetch notifications from backend when page first renders
     useEffect(() => {
@@ -38,38 +36,29 @@ function NotificationFeed() {
         return () => clearInterval(interval);
     }, []);
 
-    // Create row virtualizer for React Virtualize
-    const rowVirtualizer = useVirtualizer({
-        count: notifications.length,
-        getScrollElement: () => parentRef.current,
-        estimateSize: () => 80,
-        overscan: 0,
-        paddingStart: 20,
-        paddingEnd: 20,
-    })
 
     return (
         <div id="notification-feed">
-            <div ref={ parentRef }
-            style={{ height: "400px", overflow: "auto"
-             }}
+            {/* Use React Window's FixedSizeList to for list virtualization */}
+            <List
+                height={400}
+                itemCount={notifications.length}
+                itemSize={80}
+                width={"100%"}
+                overscanCount={0}
             >
-                {/* Get total size of list to store */}
-                <div style={{ height: `${rowVirtualizer.getTotalSize() + 40}px`, width: "100%", position: "relative" }}
-                >
-                    {rowVirtualizer.getVirtualItems().map((virtualItem) => (
-                        <div key={ virtualItem.key }
-                        style={{ position: "absolute",
-                            width: "100%", 
-                            height: "70px", 
-                            transform: `translateY(${virtualItem.start}px)`,
-                            marginBottom: "10px"}}
-                            >
-                                <NotificationCard notification={notifications[virtualItem.index]} />
-                            </div>
-                    ))}
-                </div>
-            </div>
+                {({ index, style }) => (
+                    <NotificationCard
+                        notification={notifications[index]}
+                        style={{
+                            ...style,
+                            height: "70px",
+                            marginBottom: "10px",
+                        }}
+                        key={notifications[index].id}
+                    />
+                )}
+            </List>
         </div>
     );
 }
