@@ -1,4 +1,5 @@
 import "../css/notificationCard.css";
+
 function NotificationCard({ notification, style }) {
     // Convert timestamp to Day Month Year, Time
     function getTimestamp(timestamp) {
@@ -17,6 +18,7 @@ function NotificationCard({ notification, style }) {
         return `${day} ${month} ${year} ${time}${a.toLowerCase()}`;
     }
     return (
+        /* Use style prop from React Window */
         <div className={`notification-card ${notification.type}`} style={style}>
             <p className="notification-message">{notification.content.text}</p>
             <div className="notification-timestamp">

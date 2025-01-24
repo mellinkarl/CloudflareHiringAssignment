@@ -3,7 +3,6 @@ import { useState, useEffect } from "react";
 import { FixedSizeList as List } from 'react-window';
 import "../css/notificationFeed.css";
 
-
 function NotificationFeed() {
     const [notifications, setNotifications] = useState([]);
 
@@ -30,8 +29,10 @@ function NotificationFeed() {
                 console.error("Error retrieving notifications", e);
             }
         }
+        // Load notifications when the page initially loads
         loadNotifications();
-        // Load notifications on interval of 4 seconds
+
+        // Reload notifications on interval of 4 seconds
         const interval = setInterval(loadNotifications, 4000);
         return () => clearInterval(interval);
     }, []);
